@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <component-a></component-a>
+    <component-b></component-b>
+  </div>
+  <script>
+    var vm = new Vue();
+    var A = {
+      template: '<button @click="eventa">{{a}}</button>',
+      data: function(){
+        return {
+          a: 'A组件内容'
+        }
+      },
+      methods:{
+        eventa:function(){
+          vm.$emit('change',this.a)
+        }
+      }
+    }
+
+    var B = {
+      template: '<button>{{a}}</button>',
+      data: function(){
+        return {
+          a: 'B组件内容'
+        }
+      },
+      mounted() {
+        vm.$on('change',function(data){
+          this.a = data
+        }.bind(this))
+      }
+    }
+
+   new Vue({
+      el: '#app',
+      components:{
+        'component-a': A,
+        'component-b': B
+      }
+    })
+
+
+  </script>
+</body>
+</html>

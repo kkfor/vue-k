@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <component-a  @event2="event1"></component-a>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      methods:{
+        event1: function(data){
+          alert(data)
+        }
+      },
+      components:{
+        'component-a':{
+          template: '<div @click="show">{{a}}</div>',
+          data: function(){
+            return {
+              a: '子组件内容'
+            }
+          },
+          methods:{
+            show:function(){
+              alert('子组件')
+              this.$emit('event2',[this.a])
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
