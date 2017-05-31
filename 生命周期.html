@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>生命周期</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{msg}}
+    <input type="text" v-model="msg">
+    <input type="text" v-once="msg">
+    <ul>
+      <li v-for="item in arr">
+        {{item}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data:{
+        msg:'hello',
+        arr:['lisi','wangwu','zhaoliu']
+      },
+      beforeCreate(){
+        alert('beforeCreate-->' + this +'-->'+ this.msg)
+      },
+      created(){
+        alert('created-->' + this.msg + '-->' + this.$el);
+      },
+      beforeMount(){
+        alert('beforeMount-->' + this.$el);
+      },
+      mounted(){
+        this.$nextTick(function(){
+          alert('mounted-->' + this.msg)
+          this.msg="fdf"
+        })
+      },
+      beforeUpdate(){
+        alert('beforeUpdate-->' + this.msg)
+      },
+      updated(){
+        alert('updated-->' + this.msg)
+      }
+    })
+  </script>
+</body>
+</html>
