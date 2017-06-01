@@ -9,9 +9,9 @@
 </head>
 <body>
   <div id="app">
+    <button id='btn'>销毁</button>
     {{msg}}
     <input type="text" v-model="msg">
-    <input type="text" v-once="msg">
     <ul>
       <li v-for="item in arr">
         {{item}}
@@ -40,13 +40,20 @@
           this.msg="fdf"
         })
       },
-      beforeUpdate(){
-        alert('beforeUpdate-->' + this.msg)
-      },
-      updated(){
-        alert('updated-->' + this.msg)
+      // beforeUpdate(){
+      //   alert('beforeUpdate-->' + this.msg)
+      // },
+      // updated(){
+      //   alert('updated-->' + this.msg)
+      // },
+      destroyed(){
+        alert('销毁')
       }
     })
+
+    document.getElementById("btn").onclick=function(){
+      vm.$destroy();
+    }
   </script>
 </body>
 </html>
