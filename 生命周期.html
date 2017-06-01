@@ -46,8 +46,11 @@
       // updated(){
       //   alert('updated-->' + this.msg)
       // },
+      beforeDestroy(){
+        alert('beforeDestroy-->' + this.msg)
+      },
       destroyed(){
-        alert('销毁')
+        alert('destroyed-->' + this.msg)
       }
     })
 

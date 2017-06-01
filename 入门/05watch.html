@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		浅
+		{{msg}}<input type="text" v-model="msg">
+		<br>
+		深
+		<li v-for="item in json">
+			{{item.name}}
+		<input type="text" v-model="item.name">
+		</li>
+	</div>
+	<script>
+
+		// 实例
+		var vm = new Vue({
+			data:{
+				msg: 'xiaoming',
+				json:[
+					{
+						name: 'liming',
+						age: 22
+					}
+				]
+			},
+			watch: {
+				msg:function(value,oldvalue){
+					console.log(value + '-->' + oldvalue)
+					console.log('改变了msg')
+				},
+				json: {
+					handler:function(value,oldvalue){
+						console.log(value + '-->' + oldvalue)
+						console.log('改变了');
+					},
+					deep:true
+				}
+			}
+		}).$mount('#app')
+		
+	</script>
+</body>
+</html>

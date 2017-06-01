@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>过滤器</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{msg | upperCase}}
+		<br>
+		{{msg | lowerCase | add}}
+	</div>
+	<script>
+		// 注册全局过滤器
+		Vue.filter('upperCase',function(value){
+			return value.toUpperCase()
+		})
+
+		new Vue({
+			el: '#app',
+			data:{
+				msg: 'hello',
+				msg2: 'AAAbbb'
+			},
+			//局部过滤器
+			filters:{
+				lowerCase:function(data){
+					return data.toLowerCase();
+				},
+				add:function(data){
+					return data+"过滤器添加内容"
+				}
+			}
+		})
+	</script>
+</body>
+</html>
